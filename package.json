@@ -1,5 +1,6 @@
 {
   "name": "latest-tag-action",
+  "version": "1.0.0",
   "description": "GitHub Action: Find the latest tag in a GitHub repository",
   "main": "index.js",
   "scripts": {
