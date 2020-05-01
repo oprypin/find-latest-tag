@@ -26,4 +26,5 @@ jobs:
         id: tag
       - run: |
           [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
+      - run: npm test
       - run: npm audit --audit-level=moderate
