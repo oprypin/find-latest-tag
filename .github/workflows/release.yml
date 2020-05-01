@@ -1,0 +1,19 @@
+name: CI (release)
+
+on:
+  push:
+    branches:
+      - v1
+  schedule:
+    - cron: '0 6 * * 6'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: oprypin/latest-tag-action@v1
+        with:
+          repository: oprypin/latest-tag-action
+        id: tag
+      - run: |
+          [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]

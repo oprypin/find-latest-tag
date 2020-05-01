@@ -1,0 +1,33 @@
+{
+  "name": "latest-tag-action",
+  "description": "GitHub Action: Find the latest tag in a GitHub repository",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint index.js",
+    "test": "eslint index.js && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oprypin/latest-tag-action.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "Release"
+  ],
+  "author": "Oleh Prypin <oleh@pryp.in>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oprypin/latest-tag-action/issues"
+  },
+  "homepage": "https://github.com/oprypin/latest-tag-action",
+  "dependencies": {
+    "@actions/core": "^1.2",
+    "@octokit/rest": "^17.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^25.5.3"
+  }
+}

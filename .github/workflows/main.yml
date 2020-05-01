@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - v1
+  schedule:
+    - cron: '0 6 * * 6'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - run: npm install
+      - uses: ./
+        with:
+          repository: oprypin/latest-tag-action
+        id: tag
+      - run: |
+          [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
+      - run: npm audit --audit-level=moderate

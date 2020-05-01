@@ -1,0 +1,21 @@
+name: Get Latest Tag
+description: Find the latest tag in a GitHub repository
+inputs:
+  repository:
+    description: Repository name with owner. E.g. actions/checkout
+    required: true
+  prefix:
+    description: Consider only tags starting with this string prefix
+  releases-only:
+    description: If true, consider only tags that have an associated release
+  sort-tags:
+    description: If true, look through all tags to find the greatest (semver-like) version, else just get the most recent tag. Defaults to true (strongly recommended), or to false if *releases-only* is enabled
+outputs:
+  tag:
+    description: The full tag name (incl. prefix) that was found
+runs:
+  using: node12
+  main: index.js
+branding:
+  icon: tag
+  color: blue
