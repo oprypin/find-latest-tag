@@ -1,4 +1,4 @@
-name: Get Latest Tag
+name: Find Latest Tag
 description: Find the latest tag in a GitHub repository
 inputs:
   repository:
