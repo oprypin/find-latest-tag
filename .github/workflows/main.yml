@@ -20,11 +20,11 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
       - run: npm install
+      - run: npm test
       - uses: ./
         with:
           repository: oprypin/latest-tag-action
         id: tag
       - run: |
           [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
-      - run: npm test
       - run: npm audit --audit-level=moderate

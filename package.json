@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "lint": "eslint index.js",
-    "test": "eslint index.js && jest"
+    "lint": "eslint .",
+    "test": "eslint . && jest"
   },
   "repository": {
     "type": "git",
