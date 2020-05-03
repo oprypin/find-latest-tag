@@ -1,5 +1,5 @@
 {
-  "name": "latest-tag-action",
+  "name": "find-latest-tag",
   "description": "GitHub Action: Find the latest tag in a GitHub repository",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oprypin/latest-tag-action.git"
+    "url": "git+https://github.com/oprypin/find-latest-tag.git"
   },
   "keywords": [
     "GitHub",
@@ -19,9 +19,9 @@
   "author": "Oleh Prypin <oleh@pryp.in>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/oprypin/latest-tag-action/issues"
+    "url": "https://github.com/oprypin/find-latest-tag/issues"
   },
-  "homepage": "https://github.com/oprypin/latest-tag-action",
+  "homepage": "https://github.com/oprypin/find-latest-tag",
   "dependencies": {
     "@actions/core": "^1.2",
     "@octokit/rest": "^17.6"

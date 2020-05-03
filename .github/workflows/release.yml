@@ -11,9 +11,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: oprypin/latest-tag-action@v1
+      - uses: oprypin/find-latest-tag@v1
         with:
-          repository: oprypin/latest-tag-action
+          repository: oprypin/find-latest-tag
         id: tag
       - run: |
           [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
