@@ -1,5 +1,5 @@
-latest-tag-action
-=================
+find-latest-tag
+===============
 
 [GitHub Action][] to **find the latest tag in a GitHub repository**
 
@@ -7,7 +7,7 @@ latest-tag-action
 
 ```yaml
 steps:
-  - uses: oprypin/latest-tag-action@v1
+  - uses: oprypin/find-latest-tag@v1
     with:
       repository: octokit/rest.js  # The repository to scan.
       releases_only: true  # We know that all relevant tags have a GitHub release for them.
@@ -23,7 +23,7 @@ steps:
 
 ```yaml
 steps:
-  - uses: oprypin/latest-tag-action@v1
+  - uses: oprypin/find-latest-tag@v1
     with:
       repository: slembcke/Chipmunk2D
       # releases_only: false  # This repository doesn't use GitHub's "release" feature.

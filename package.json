@@ -1,16 +1,16 @@
 {
-  "name": "latest-tag-action",
+  "name": "find-latest-tag",
   "version": "1.0.1",
   "description": "GitHub Action: Find the latest tag in a GitHub repository",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "lint": "eslint index.js",
-    "test": "eslint index.js && jest"
+    "lint": "eslint .",
+    "test": "eslint . && jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oprypin/latest-tag-action.git"
+    "url": "git+https://github.com/oprypin/find-latest-tag.git"
   },
   "keywords": [
     "GitHub",
@@ -20,15 +20,15 @@
   "author": "Oleh Prypin <oleh@pryp.in>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/oprypin/latest-tag-action/issues"
+    "url": "https://github.com/oprypin/find-latest-tag/issues"
   },
-  "homepage": "https://github.com/oprypin/latest-tag-action",
+  "homepage": "https://github.com/oprypin/find-latest-tag",
   "dependencies": {
-    "@actions/core": "^1.2",
-    "@octokit/rest": "^17.6"
+    "@actions/core": "^1.2.4",
+    "@octokit/rest": "^17.8.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "jest": "^25.5.3"
+    "jest": "^25.5.4"
   }
 }
