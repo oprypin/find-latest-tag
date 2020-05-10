@@ -25,7 +25,7 @@ async function run() {
     }
 }
 
-const octokit = new Octokit();
+const octokit = new Octokit({auth: core.getInput("token") || null});
 
 async function getLatestTag(owner, repo, prefix, releasesOnly, sortTags) {
     const endpoint = (releasesOnly ? octokit.repos.listReleases : octokit.repos.listTags);

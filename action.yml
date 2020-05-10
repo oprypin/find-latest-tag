@@ -10,6 +10,9 @@ inputs:
     description: If true, consider only tags that have an associated release
   sort-tags:
     description: If true, look through all tags to find the greatest (semver-like) version, else just get the most recent tag. Defaults to true (strongly recommended), or to false if *releases-only* is enabled
+  token:
+    description: Personal access token (auto-populated). It is used only because anonymous requests are rate-limited. It can be overridden to an empty value.
+    default: ${{ github.token }}
 outputs:
   tag:
     description: The full tag name (incl. prefix) that was found
