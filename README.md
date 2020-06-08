@@ -10,7 +10,7 @@ steps:
   - uses: oprypin/find-latest-tag@v1
     with:
       repository: octokit/rest.js  # The repository to scan.
-      releases_only: true  # We know that all relevant tags have a GitHub release for them.
+      releases-only: true  # We know that all relevant tags have a GitHub release for them.
     id: octokit  # The step ID to refer to later.
 
   - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
@@ -26,7 +26,7 @@ steps:
   - uses: oprypin/find-latest-tag@v1
     with:
       repository: slembcke/Chipmunk2D
-      # releases_only: false  # This repository doesn't use GitHub's "release" feature.
+      # releases-only: false  # This repository doesn't use GitHub's "release" feature.
       prefix: 'Chipmunk-7.'  # Other kinds of tags are irrelevant; also limit to major version 7.
     id: chipmunk_version
 ```
