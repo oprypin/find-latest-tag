@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "lint": "eslint .",
-    "test": "eslint . && jest"
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -24,10 +24,10 @@
   "homepage": "https://github.com/oprypin/find-latest-tag",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@octokit/rest": "^18.0.6"
+    "@octokit/rest": "^18.0.6",
+    "tag-cmp": "^1.0.1"
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
-    "jest": "^26.4.2"
+    "eslint": "^7.10.0"
   }
 }
