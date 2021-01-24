@@ -1,6 +1,6 @@
 const core = require("@actions/core");
 const {Octokit} = require("@octokit/rest");
-const tagUtil = require("./tags");
+const {cmpTags} = require("tag-cmp");
 
 async function run() {
     try {
@@ -51,7 +51,7 @@ async function getLatestTag(owner, repo, prefix, releasesOnly, sortTags) {
         }
         throw error;
     }
-    tags.sort(tagUtil.cmpTags);
+    tags.sort(cmpTags);
     const [latestTag] = tags.slice(-1);
     return latestTag;
 }
