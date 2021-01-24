@@ -31,6 +31,8 @@ steps:
     id: chipmunk_version
 ```
 
+[Find usages in the wild!](https://github.com/search?l=YAML&q=%22oprypin%2Ffind-latest-tag%22&type=Code)
+
 ## Usage
 
 ### Inputs
