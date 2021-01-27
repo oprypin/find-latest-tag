@@ -11,9 +11,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
+
+
+
+
       - uses: oprypin/find-latest-tag@v1
         with:
           repository: oprypin/find-latest-tag
-        id: tag
+        id: self
       - run: |
-          [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
+          [[ "${{ steps.self.outputs.tag }}" == v1.* ]]
+
+      - uses: oprypin/find-latest-tag@v1
+        with:
+          repository: oprypin/test-private-repo
+          token: ${{ secrets.PERSONAL_TOKEN }}
+        id: priv
+      - run: |
+          [[ "${{ steps.priv.outputs.tag }}" == v1.3.7 ]]

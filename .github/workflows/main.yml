@@ -12,17 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
       - run: npm install
       - run: npm test
+      - run: npm audit --audit-level=moderate
+
       - uses: ./
         with:
           repository: oprypin/find-latest-tag
-        id: tag
+        id: self
       - run: |
-          [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
-      - run: npm audit --audit-level=moderate
+          [[ "${{ steps.self.outputs.tag }}" == v1.* ]]
+
+      - uses: ./
+        with:
+          repository: oprypin/test-private-repo
+          token: ${{ secrets.PERSONAL_TOKEN }}
+        id: priv
+      - run: |
+          [[ "${{ steps.priv.outputs.tag }}" == v1.3.7 ]]
