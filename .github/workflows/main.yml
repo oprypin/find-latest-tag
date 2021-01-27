@@ -27,5 +27,7 @@ jobs:
           repository: oprypin/test-private-repo
           token: ${{ secrets.PERSONAL_TOKEN }}
         id: priv
+        if: github.event_name != 'pull_request'
       - run: |
           [[ "${{ steps.priv.outputs.tag }}" == v1.3.7 ]]
+        if: github.event_name != 'pull_request'
