@@ -61,6 +61,14 @@ steps:
 
   Return the first tag reported by GitHub. It's safe to rely on this being the **most recently created** release only for `releases-only: false`. When looking at tags, the behavior is undefined.
 
+* **`token: ${{ secrets.PERSONAL_TOKEN }}`**
+
+  Required for scanning tags of **other private repositories** (referred to as *destination* repo), because the default `GITHUB_TOKEN` only gives access to the repository that's *running* the action (and public ones).
+
+  Then a user that has access to the destination repository needs to [create](https://github.com/settings/tokens/new) a [personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with `repo` access, and that token's value should be [added as a repository secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) to the *running* repository under the name "`PERSONAL_TOKEN`".
+
+  See also: [Example](https://github.com/oprypin/find-latest-tag/blob/85ce4ccf033896cde4cd274773bacb49758cca11/.github/workflows/release.yml#L26-L31), [Security considerations](https://docs.github.com/en/actions/learn-github-actions/security-hardening-for-github-actions#considering-cross-repository-access).
+
 ### Outputs
 
 * **`tag`** (`${{ steps.some_step_id.outputs.tag }}`)
