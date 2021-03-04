@@ -72,7 +72,7 @@ steps:
 * **`regex: regex pattern`**
 
   Consider only tags that matches specified RegEx pattern.  
-  For example, `regex: ^\d\.\d\.\d$` matches tags such as `1.2.3` etc.
+  For example, `regex: '^\d\.\d\.\d$'` matches tags such as `1.2.3` etc.
 
 ### Outputs
 
