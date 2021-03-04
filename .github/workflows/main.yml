@@ -25,6 +25,23 @@ jobs:
 
       - uses: ./
         with:
+          repository: oprypin/find-latest-tag
+          regex: '^[a-z]1\.0'
+        id: self_re
+      - run: |
+          [[ "${{ steps.self_re.outputs.tag }}" == v1.0.5 ]]
+
+      - uses: ./
+        with:
+          repository: oprypin/find-latest-tag
+          prefix: 'v1.0'
+          releases-only: true
+        id: self_pre
+      - run: |
+          [[ "${{ steps.self_pre.outputs.tag }}" == v1.0.5 ]]
+
+      - uses: ./
+        with:
           repository: oprypin/test-private-repo
           token: ${{ secrets.PERSONAL_TOKEN }}
         id: priv
