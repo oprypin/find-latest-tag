@@ -13,6 +13,8 @@ inputs:
   token:
     description: Personal access token (auto-populated). It is used only because anonymous requests are rate-limited. It can be overridden to an empty value.
     default: ${{ github.token }}
+  regex:
+    description: Consider only tags that matches specified RegEx pattern.
 outputs:
   tag:
     description: The full tag name (incl. prefix) that was found

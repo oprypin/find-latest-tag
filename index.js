@@ -19,7 +19,9 @@ async function run() {
         const sortTagsDefault = (releasesOnly ? "false" : "true");
         const sortTags = (core.getInput("sort-tags") || sortTagsDefault).toLowerCase() === "true";
 
-        core.setOutput("tag", await getLatestTag(owner, repo, prefix, releasesOnly, sortTags));
+        const regex = core.getInput("regex") || null;
+
+        core.setOutput("tag", await getLatestTag(owner, repo, prefix, releasesOnly, sortTags, regex));
     } catch (error) {
         core.setFailed(error);
     }
@@ -27,7 +29,7 @@ async function run() {
 
 const octokit = new Octokit({auth: core.getInput("token") || null});
 
-async function getLatestTag(owner, repo, prefix, releasesOnly, sortTags) {
+async function getLatestTag(owner, repo, prefix, releasesOnly, sortTags, regex) {
     const endpoint = (releasesOnly ? octokit.repos.listReleases : octokit.repos.listTags);
     const pages = endpoint.endpoint.merge({"owner": owner, "repo": repo, "per_page": 100});
 
@@ -35,6 +37,9 @@ async function getLatestTag(owner, repo, prefix, releasesOnly, sortTags) {
     for await (const item of getItemsFromPages(pages)) {
         const tag = (releasesOnly ? item["tag_name"] : item["name"]);
         if (!tag.startsWith(prefix)) {
+            continue;
+        }
+        if (regex && !new RegExp(regex).test(tag)) {
             continue;
         }
         if (!sortTags) {

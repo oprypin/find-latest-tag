@@ -69,6 +69,11 @@ steps:
 
   See also: [Example](https://github.com/oprypin/find-latest-tag/blob/85ce4ccf033896cde4cd274773bacb49758cca11/.github/workflows/release.yml#L26-L31), [Security considerations](https://docs.github.com/en/actions/learn-github-actions/security-hardening-for-github-actions#considering-cross-repository-access).
 
+* **`regex: regex pattern`**
+
+  Consider only tags that matches specified RegEx pattern.  
+  For example, `regex: ^\d\.\d\.\d$` matches tags such as `1.2.3` etc.
+
 ### Outputs
 
 * **`tag`** (`${{ steps.some_step_id.outputs.tag }}`)
