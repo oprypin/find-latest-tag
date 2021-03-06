@@ -41,10 +41,6 @@ steps:
 
   **Required.** Name of a repository on GitHub, with owner; this refers to https://github.com/username/reponame.git.
 
-* **`prefix: 'someprefix-'`**
-
-  Consider only tags starting with this string prefix, like "someprefix-1.2.3". The prefix will **not** be excluded from the result.
-
 * **`releases-only: true`**
 
   Consider only tags that have an associated release.
@@ -52,6 +48,15 @@ steps:
 * **`releases-only: false`** (default)
 
   Consider all tags.
+
+* **`prefix: 'someprefix-'`**
+
+  Consider only tags starting with this string prefix, like "someprefix-1.2.3". The prefix will **not** be excluded from the result.
+
+* **`regex: 'regex pattern'`**
+
+  Consider only tags that match the specified regular expression pattern (not anchored).
+  For example, `regex: '^\d+\.\d+\.\d+$'` matches tags such as `1.2.3` etc.
 
 * **`sort-tags: true`** (default)
 
