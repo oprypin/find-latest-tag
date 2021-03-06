@@ -31,6 +31,8 @@ steps:
     id: chipmunk_version
 ```
 
+[Find usages in the wild!](https://github.com/search?l=YAML&q=%22oprypin%2Ffind-latest-tag%22&type=Code)
+
 ## Usage
 
 ### Inputs
@@ -38,10 +40,6 @@ steps:
 * **`repository: username/reponame`**
 
   **Required.** Name of a repository on GitHub, with owner; this refers to https://github.com/username/reponame.git.
-
-* **`prefix: 'someprefix-'`**
-
-  Consider only tags starting with this string prefix, like "someprefix-1.2.3". The prefix will **not** be excluded from the result.
 
 * **`releases-only: true`**
 
@@ -51,6 +49,15 @@ steps:
 
   Consider all tags.
 
+* **`prefix: 'someprefix-'`**
+
+  Consider only tags starting with this string prefix, like "someprefix-1.2.3". The prefix will **not** be excluded from the result.
+
+* **`regex: 'regex pattern'`**
+
+  Consider only tags that match the specified regular expression pattern (not anchored).
+  For example, `regex: '^\d+\.\d+\.\d+$'` matches tags such as `1.2.3` etc.
+
 * **`sort-tags: true`** (default)
 
   Look through all tags to find the one with the [greatest (semver-like) version](#version-precedence).
@@ -58,6 +65,14 @@ steps:
 * **`sort-tags: false`** (default for `releases-only: true`)
 
   Return the first tag reported by GitHub. It's safe to rely on this being the **most recently created** release only for `releases-only: false`. When looking at tags, the behavior is undefined.
+
+* **`token: ${{ secrets.PERSONAL_TOKEN }}`**
+
+  Required for scanning tags of **other private repositories** (referred to as *destination* repo), because the default `GITHUB_TOKEN` only gives access to the repository that's *running* the action (and public ones).
+
+  Then a user that has access to the destination repository needs to [create](https://github.com/settings/tokens/new) a [personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with `repo` access, and that token's value should be [added as a repository secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) to the *running* repository under the name "`PERSONAL_TOKEN`".
+
+  See also: [Example](https://github.com/oprypin/find-latest-tag/blob/85ce4ccf033896cde4cd274773bacb49758cca11/.github/workflows/release.yml#L26-L31), [Security considerations](https://docs.github.com/en/actions/learn-github-actions/security-hardening-for-github-actions#considering-cross-repository-access).
 
 ### Outputs
 

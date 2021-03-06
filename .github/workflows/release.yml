@@ -11,9 +11,41 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
+
+
+
+
       - uses: oprypin/find-latest-tag@v1
         with:
           repository: oprypin/find-latest-tag
-        id: tag
+        id: self
       - run: |
-          [[ "${{ steps.tag.outputs.tag }}" == v1.* ]]
+          [[ "${{ steps.self.outputs.tag }}" == v1.* ]]
+
+      - uses: oprypin/find-latest-tag@v1
+        with:
+          repository: oprypin/find-latest-tag
+          regex: '^[a-z]1\.0'
+        id: self_re
+      - run: |
+          [[ "${{ steps.self_re.outputs.tag }}" == v1.0.5 ]]
+
+      - uses: oprypin/find-latest-tag@v1
+        with:
+          repository: oprypin/find-latest-tag
+          prefix: 'v1.0'
+          releases-only: true
+        id: self_pre
+      - run: |
+          [[ "${{ steps.self_pre.outputs.tag }}" == v1.0.5 ]]
+
+      - uses: oprypin/find-latest-tag@v1
+        with:
+          repository: oprypin/test-private-repo
+          token: ${{ secrets.PERSONAL_TOKEN }}
+        id: priv
+        if: github.event_name != 'pull_request'
+      - run: |
+          [[ "${{ steps.priv.outputs.tag }}" == v1.3.7 ]]
+        if: github.event_name != 'pull_request'

@@ -4,10 +4,12 @@ inputs:
   repository:
     description: Repository name with owner. E.g. actions/checkout
     required: true
-  prefix:
-    description: Consider only tags starting with this string prefix
   releases-only:
     description: If true, consider only tags that have an associated release
+  prefix:
+    description: Consider only tags starting with this string prefix
+  regex:
+    description: Consider only tags that matches specified RegEx pattern.
   sort-tags:
     description: If true, look through all tags to find the greatest (semver-like) version, else just get the most recent tag. Defaults to true (strongly recommended), or to false if *releases-only* is enabled
   token:
