@@ -12,12 +12,21 @@ inputs:
     description: Consider only tags that matches specified RegEx pattern.
   sort-tags:
     description: If true, look through all tags to find the greatest (semver-like) version, else just get the most recent tag. Defaults to true (strongly recommended), or to false if *releases-only* is enabled
+  compared-to-tag:
+    description: Specify a value (can be a ref) that is compared to the found tag (the latest tag).
   token:
     description: Personal access token (auto-populated). It is used only because anonymous requests are rate-limited. It can be overridden to an empty value.
     default: ${{ github.token }}
 outputs:
   tag:
     description: The full tag name (incl. prefix) that was found
+  equal:
+    description: Indicates that the value (set by compared-to-tag) is equal to the found tag (true/false/"").
+  newer:
+    description: Indicates that the value (set by compared-to-tag) is newer than the found tag (true/false/"").
+  older:
+    description: Indicates that the value (set by compared-to-tag) is newer than the found tag (true/false/"").
+
 runs:
   using: node12
   main: index.js

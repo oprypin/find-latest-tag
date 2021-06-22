@@ -31,6 +31,21 @@ steps:
     id: chipmunk_version
 ```
 
+Compare with the current github ref:
+
+```yaml
+steps:
+  - uses: oprypin/find-latest-tag@v1
+    with:
+      repository: docker/metadata-action
+      compared-to-tag: ${{ github.ref }}
+    id: compare
+  - run: |
+      echo "Ref is equal: ${{ steps.compare.outputs.equal }}"
+      echo "Ref is newer: ${{ steps.compare.outputs.newer }}"
+      echo "Ref is older: ${{ steps.compare.outputs.older }}"
+```
+
 [Find usages in the wild!](https://github.com/search?l=YAML&q=%22oprypin%2Ffind-latest-tag%22&type=Code)
 
 ## Usage
@@ -66,6 +81,10 @@ steps:
 
   Return the first tag reported by GitHub. It's safe to rely on this being the **most recently created** release only for `releases-only: false`. When looking at tags, the behavior is undefined.
 
+* **`compared-to-tag: 'v1.2.3'`** (default for `compared-to-tag: ''`)
+
+  Specify a tag, a release name or simply a *github reference* value which is compared the tag found by the action (i.e. latest tag). The result of comparison is provided by `newer`, `older` and `equal` output values. It's important to note that `refs/*` prefixes are stripped off from `compared-to-tag` value and comparisson is not prefromed if the stripped value does not match the regex (in case it's given).
+
 * **`token: ${{ secrets.PERSONAL_TOKEN }}`**
 
   Required for scanning tags of **other private repositories** (referred to as *destination* repo), because the default `GITHUB_TOKEN` only gives access to the repository that's *running* the action (and public ones).
@@ -79,6 +98,18 @@ steps:
 * **`tag`** (`${{ steps.some_step_id.outputs.tag }}`)
 
   The tag that was found is made available as the step's output.
+
+* **`newer`** (`${{ steps.some_step_id.outputs.newer }}`)
+
+  If the value provied by `compared-to-tag` is newer (greater) than the found tag (the latest) then `newer` output value is set to `true` otherwise `false`. Following the same pattern we also get `older` and `equal` set to `true/false`.
+
+* **`older`** (`${{ steps.some_step_id.outputs.older }}`)
+
+  Similar to the `newer` output. 
+
+* **`equal`** (`${{ steps.some_step_id.outputs.equal }}`)
+
+  Similar to the `newer` output.
 
 ### Errors
 
