@@ -23,11 +23,11 @@
   },
   "homepage": "https://github.com/oprypin/find-latest-tag",
   "dependencies": {
-    "@actions/core": "^1.6.0",
+    "@actions/core": "^1.7.0",
     "@octokit/rest": "^18.12.0",
     "tag-cmp": "^1.0.1"
   },
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "eslint": "^8.14.0"
   }
 }
