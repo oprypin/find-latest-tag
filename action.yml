@@ -19,7 +19,7 @@ outputs:
   tag:
     description: The full tag name (incl. prefix) that was found
 runs:
-  using: node12
+  using: node16
   main: index.js
 branding:
   icon: tag
