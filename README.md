@@ -15,7 +15,7 @@ steps:
 
   - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
 
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
     with:
       repository: octokit/rest.js  # Download that repository.
       ref: ${{ steps.octokit.outputs.tag }}  # At the latest released version, found earlier.
