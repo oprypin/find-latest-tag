@@ -31,6 +31,21 @@ steps:
     id: chipmunk_version
 ```
 
+Compare with the current github ref:
+
+```yaml
+steps:
+  - uses: oprypin/find-latest-tag@v1
+    id: upstream-latest
+    with:
+      repository: cloudflare/wrangler
+      compare-to: ${{ github.ref }}
+  - run: |
+      echo "Upstream latest tag is equal (than this github.ref): ${{ steps.upstream-latest.outputs.equal }}"
+      echo "Upstream latest tag is newer (than this github.ref): ${{ steps.upstream-latest.outputs.equal }}"
+      echo "Upstream latest tag is older (than this github.ref): ${{ steps.upstream-latest.outputs.equal }}"
+```
+
 [Find usages in the wild!](https://github.com/search?l=YAML&q=%22oprypin%2Ffind-latest-tag%22&type=Code)
 
 ## Usage
@@ -66,6 +81,10 @@ steps:
 
   Return the first tag reported by GitHub. It's safe to rely on this being the **most recently created** release only for `releases-only: false`. When looking at tags, the behavior is undefined.
 
+* **`compare-to: 'v1.2.3'`** (default for `compare-to: ''`)
+
+  Compare the repository latest tag with the version provied (ex. v1.2.3). Note that ${{ github.ref }} is also supported. If the latest tag in the given repository found then it is compared to the `compare-to` value. Result is stored into `newer`/`older`/`equal` can be `true`, `false` or *the output can be omitted*.
+
 * **`token: ${{ secrets.PERSONAL_TOKEN }}`**
 
   Required for scanning tags of **other private repositories** (referred to as *destination* repo), because the default `GITHUB_TOKEN` only gives access to the repository that's *running* the action (and public ones).
@@ -79,6 +98,18 @@ steps:
 * **`tag`** (`${{ steps.some_step_id.outputs.tag }}`)
 
   The tag that was found is made available as the step's output.
+
+* **`newer`** (`${{ steps.some_step_id.outputs.newer }}`)
+
+  If the latest tag found (in the given repository) is newer than specifed `compare-to` value then result is `true` otherwise `false`. Output can be omitted which indicates that the latest tag hasn't been found due to absence or filtered out be means of `regex`, `prefix` or other parameters.
+
+* **`older`** (`${{ steps.some_step_id.outputs.older }}`)
+
+  Similar to the `newer` output.
+
+* **`equal`** (`${{ steps.some_step_id.outputs.equal }}`)
+
+  Similar to the `newer` output.
 
 ### Errors
 
