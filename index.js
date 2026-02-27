@@ -20,7 +20,13 @@ async function run() {
         const sortTagsDefault = (releasesOnly ? "false" : "true");
         const sortTags = (core.getInput("sort-tags") || sortTagsDefault).toLowerCase() === "true";
 
-        core.setOutput("tag", await getLatestTag(owner, repo, releasesOnly, prefix, regex, sortTags));
+        const preRelease = core.getInput("pre-release") || null;
+        let isPreRelease = null;
+        if (preRelease !== null) {
+            isPreRelease = (core.getInput("pre-release") || "false").toLowerCase() === "true";
+        }
+
+        core.setOutput("tag", await getLatestTag(owner, repo, releasesOnly, isPreRelease, prefix, regex, sortTags));
     } catch (error) {
         core.setFailed(error);
     }
@@ -28,7 +34,7 @@ async function run() {
 
 const octokit = new Octokit({auth: core.getInput("token") || null});
 
-async function getLatestTag(owner, repo, releasesOnly, prefix, regex, sortTags) {
+async function getLatestTag(owner, repo, releasesOnly, isPreRelease, prefix, regex, sortTags) {
     const endpoint = (releasesOnly ? octokit.repos.listReleases : octokit.repos.listTags);
     const pages = endpoint.endpoint.merge({"owner": owner, "repo": repo, "per_page": 100});
 
@@ -39,6 +45,9 @@ async function getLatestTag(owner, repo, releasesOnly, prefix, regex, sortTags) 
             continue;
         }
         if (regex && !new RegExp(regex).test(tag)) {
+            continue;
+        }
+        if (releasesOnly && isPreRelease !== null && isPreRelease !== item["prerelease"]) {
             continue;
         }
         if (!sortTags) {
