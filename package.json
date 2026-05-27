@@ -2,6 +2,7 @@
   "name": "find-latest-tag",
   "description": "GitHub Action: Find the latest tag in a GitHub repository",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "lint": "eslint .",
@@ -23,11 +24,13 @@
   },
   "homepage": "https://github.com/oprypin/find-latest-tag",
   "dependencies": {
-    "@actions/core": "^1.11.1",
+    "@actions/core": "^3.0.1",
     "@octokit/rest": "^22.0.1",
     "tag-cmp": "^1.0.1"
   },
   "devDependencies": {
-    "eslint": "^9.39.1"
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0"
   }
 }

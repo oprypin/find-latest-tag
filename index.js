@@ -1,6 +1,6 @@
-const core = require("@actions/core");
-const {Octokit} = require("@octokit/rest");
-const {cmpTags} = require("tag-cmp");
+import * as core from "@actions/core";
+import {Octokit} from "@octokit/rest";
+import {cmpTags} from "tag-cmp";
 
 async function run() {
     try {
@@ -68,6 +68,4 @@ async function* getItemsFromPages(pages) {
     }
 }
 
-if (require.main === module) {
-    run();
-}
+run();
