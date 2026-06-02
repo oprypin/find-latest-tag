@@ -49,6 +49,14 @@ steps:
 
   Consider all tags.
 
+* **`pre-release: true`**
+
+  Consider only tags that are pre-releases.
+
+* **`pre-release: false`**
+
+  Consider only tags that are not pre-releases.
+
 * **`prefix: 'someprefix-'`**
 
   Consider only tags starting with this string prefix, like "someprefix-1.2.3". The prefix will **not** be excluded from the result.
